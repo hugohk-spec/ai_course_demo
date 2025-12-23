@@ -88,7 +88,7 @@ def main():
                             
                             with col1:
                                 # Show pet image
-                                response = client.chat.completions.create(
+                                response = client.chat.images.generate(
                                     model="Qwen-Image",
                                     messages=[
                                         {"role": "system", "content": "You are an image generation model."},
