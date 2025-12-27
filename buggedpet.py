@@ -88,24 +88,23 @@ def main():
                             
                             with col1:
                                 # Show pet image
-                                response = client.images.generate(
-                                    model="Qwen-Image",
-                                    messages=[
-                                        {"role": "system", "content": "You are an image generation model."},
-                                        {"role": "user", "content": f"Generate a realistic image of a {pet_name}."}
-                                ],
-                                    extra_body={
-                                        "aspect": "4:3",
-                                        "quality": "high"
-                                    },
-                                stream=False)
-                                image_url = response.data[0].url
-                                print(image_url)
-                            
+                                st.write("Generating image...")
+                                response = client.chat.completions.create(
+                                   model="gpt-image-1",
+                                   messages=[{"role": "user", "content": "Create a picture of a " + pet_name}],
+                                   extra_body={
+                                       "aspect": "3:2",    # Options: "1:1", "3:2", "2:3", "auto"
+                                       "quality": "high"   # Options: "low", "medium", "high"
+                                      },
+                                      stream=False)
+                                image_url = response.choices[0].message.content
+                                st.image(image_url, caption=pet_name)
                             with col2:
-                                st.subheader(f"#{i}: {pet_name}")
-                                st.write(reason)
-                                st.markdown("---")
+                                st.subheader(f"Pet {i}: {pet_name}")
+                                st.write(reason)    
+
+
+
                     else:
                         st.error("Could not get 3 pet suggestions. Please try again.")
                         
