@@ -49,7 +49,7 @@ def main():
                 response = client.chat.completions.create(
                     model="gpt-3.5-turbo",
                     messages=[
-                        {"role": "system", "content": "You are a pet matching expert. Suggest exactly 3 pets. Format: 'Pet Name: [Name] | Description: [Description]'. Use 2-3 line per pet."},
+                        {"role": "system", "content": "You are a pet matching expert. Suggest exactly 3 pet types. Format: 'Pet Name: [Name] | Description: [Description]'. Use 2-3 line per pet."},
                         {"role": "user", "content": f"Personality: {personality}"}
                     ]
                 )
@@ -77,7 +77,7 @@ def main():
                         # 2. Generate Image for each pet
                         try:
                             img_response = client.chat.completions.create(
-                                model="Imagen-4",
+                                model="GPT-Image-1.5",
                                 messages=[{"role": "user", "content": f"A high-quality, professional photo of a {pet_name}"}]
                             )
                             raw_content = img_response.choices[0].message.content
